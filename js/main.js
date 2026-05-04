@@ -71,22 +71,10 @@ function initHome() {
       /* Typewriter */
       typewrite('typewriter', meta.tagline || 'Welcome.');
 
-      /* Bio — render markdown paragraphs */
+      /* Bio — render markdown paragraphs (bold + links) */
       var bioEl = document.getElementById('heroBio');
       if (bioEl) {
-        try {
-          if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
-            bioEl.innerHTML = marked.parse(body.trim(), { breaks: false, gfm: true });
-          } else {
-            throw new Error('marked unavailable');
-          }
-        } catch (_) {
-          /* Fallback: split on blank lines → <p> tags */
-          bioEl.innerHTML = body.trim()
-            .split(/\n{2,}/)
-            .map(function (p) { return '<p>' + escHtml(p.trim()) + '</p>'; })
-            .join('');
-        }
+        bioEl.innerHTML = renderBioMarkdown(body);
       }
 
       /* Quote */
@@ -126,10 +114,35 @@ function initWork() {
           .join('');
       }
     })
+    .then(function () {
+      initScrollAnimations();
+    })
     .catch(function () {
       if (expContainer) expContainer.innerHTML =
         '<p class="loading">Could not load resume data.</p>';
+      initScrollAnimations();
     });
+}
+
+function initScrollAnimations() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.timeline-entry').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.timeline-entry').forEach(function (el) {
+    observer.observe(el);
+  });
 }
 
 function renderExperienceEntry(entry) {
@@ -342,6 +355,20 @@ function formatDate(dateStr) {
   } catch (_) {
     return dateStr;
   }
+}
+
+/* Render bio markdown: bold, links, and paragraphs — no CDN needed */
+function renderBioMarkdown(text) {
+  return text.trim()
+    .split(/\n{2,}/)
+    .map(function (para) {
+      return '<p>' + para.trim()
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        + '</p>';
+    })
+    .join('');
 }
 
 /* Escape HTML special chars */
