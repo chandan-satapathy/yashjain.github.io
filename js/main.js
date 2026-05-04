@@ -55,36 +55,28 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ═══════════════════════════════════════════════════════════════════════
-   HOME — fetch data/home.md, parse frontmatter, render bio + quote
+   HOME — fetch data/home.json, render bio + quote
    ═══════════════════════════════════════════════════════════════════════ */
 function initHome() {
-  fetch('data/home.md')
+  fetch('data/home.json')
     .then(function (r) {
-      if (!r.ok) throw new Error('home.md not found');
-      return r.text();
+      if (!r.ok) throw new Error('home.json not found');
+      return r.json();
     })
-    .then(function (text) {
-      var parsed = parseFrontmatter(text);
-      var meta   = parsed.meta;
-      var body   = parsed.body;
+    .then(function (data) {
+      typewrite('typewriter', data.tagline || 'Welcome.');
 
-      /* Typewriter */
-      typewrite('typewriter', meta.tagline || 'Welcome.');
-
-      /* Bio — render markdown paragraphs (bold + links) */
       var bioEl = document.getElementById('heroBio');
-      if (bioEl) {
-        bioEl.innerHTML = renderBioMarkdown(body);
+      if (bioEl && data.bio) {
+        bioEl.innerHTML = renderBioMarkdown(data.bio);
       }
 
-      /* Quote */
       var quoteEl  = document.getElementById('heroQuote');
       var authorEl = document.getElementById('heroQuoteAuthor');
-      if (quoteEl && meta.quote)       quoteEl.textContent  = '“' + meta.quote + '”';
-      if (authorEl && meta.quoteAuthor) authorEl.textContent = '— ' + meta.quoteAuthor;
+      if (quoteEl && data.quote)       quoteEl.textContent  = '“' + data.quote + '”';
+      if (authorEl && data.quoteAuthor) authorEl.textContent = '— ' + data.quoteAuthor;
     })
     .catch(function () {
-      /* If fetch fails, still start typewriter with fallback text */
       typewrite('typewriter', 'Welcome to my little corner on the Internet.');
     });
 }
@@ -328,24 +320,6 @@ function typewrite(elementId, text, speed) {
   setTimeout(tick, 350);
 }
 
-/* Parse YAML-style frontmatter from a markdown string.
-   Supports simple key: value pairs (no nested objects). */
-function parseFrontmatter(text) {
-  var match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  if (!match) return { meta: {}, body: text };
-
-  var meta = {};
-  match[1].split('\n').forEach(function (line) {
-    var idx = line.indexOf(':');
-    if (idx === -1) return;
-    var key = line.slice(0, idx).trim();
-    var val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
-    if (key) meta[key] = val;
-  });
-
-  return { meta: meta, body: match[2] };
-}
-
 /* Format ISO date string → "October 1, 2025" */
 function formatDate(dateStr) {
   try {
@@ -357,18 +331,17 @@ function formatDate(dateStr) {
   }
 }
 
-/* Render bio markdown: bold, links, and paragraphs — no CDN needed */
-function renderBioMarkdown(text) {
-  return text.trim()
-    .split(/\n{2,}/)
-    .map(function (para) {
-      return '<p>' + para.trim()
-        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-        .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
-          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        + '</p>';
-    })
-    .join('');
+/* Render bio: accepts a string or array of paragraph strings.
+   Handles **bold** and [link](url) markdown inline. */
+function renderBioMarkdown(bio) {
+  var paragraphs = Array.isArray(bio) ? bio : bio.trim().split(/\n{2,}/);
+  return paragraphs.map(function (para) {
+    return '<p>' + para.trim()
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      + '</p>';
+  }).join('');
 }
 
 /* Escape HTML special chars */
