@@ -74,10 +74,13 @@ function initHome() {
       /* Bio — render markdown paragraphs */
       var bioEl = document.getElementById('heroBio');
       if (bioEl) {
-        if (typeof marked !== 'undefined') {
-          marked.setOptions({ breaks: false, gfm: true });
-          bioEl.innerHTML = marked.parse(body.trim());
-        } else {
+        try {
+          if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
+            bioEl.innerHTML = marked.parse(body.trim(), { breaks: false, gfm: true });
+          } else {
+            throw new Error('marked unavailable');
+          }
+        } catch (_) {
           /* Fallback: split on blank lines → <p> tags */
           bioEl.innerHTML = body.trim()
             .split(/\n{2,}/)
@@ -89,7 +92,7 @@ function initHome() {
       /* Quote */
       var quoteEl  = document.getElementById('heroQuote');
       var authorEl = document.getElementById('heroQuoteAuthor');
-      if (quoteEl && meta.quote)   quoteEl.textContent  = '“' + meta.quote + '”';
+      if (quoteEl && meta.quote)       quoteEl.textContent  = '“' + meta.quote + '”';
       if (authorEl && meta.quoteAuthor) authorEl.textContent = '— ' + meta.quoteAuthor;
     })
     .catch(function () {
@@ -273,9 +276,12 @@ function initBlogPost() {
         })
         .catch(function () {});
 
-      if (typeof marked !== 'undefined') {
-        marked.setOptions({ breaks: true, gfm: true });
-        bodyEl.innerHTML = marked.parse(md);
+      if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
+        try {
+          bodyEl.innerHTML = marked.parse(md, { breaks: true, gfm: true });
+        } catch (_) {
+          bodyEl.innerHTML = '<pre style="white-space:pre-wrap">' + escHtml(md) + '</pre>';
+        }
       } else {
         bodyEl.innerHTML =
           '<pre style="white-space:pre-wrap">' + escHtml(md) + '</pre>';
