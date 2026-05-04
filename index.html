@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem('theme') || 'light';
+      } catch (_) {}
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yash Jain</title>
+  <meta name="description"
+    content="Yash Jain — Management Consultant, Writer, and Explorer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Yash Jain</a>
+
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="work.html"       data-nav="work">Work</a>
+        <a href="blog/index.html" data-nav="blog-index">Blog</a>
+        <a href="contact.html"    data-nav="contact">Contact</a>
+      </div>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1"  x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22"   x2="5.64"  y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1"  y1="12" x2="3"  y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+          <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu"
+        aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="work.html"       data-nav="work">Work</a>
+    <a href="blog/index.html" data-nav="blog-index">Blog</a>
+    <a href="contact.html"    data-nav="contact">Contact</a>
+  </div>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+    <div class="container">
+      <section class="hero">
+
+        <!-- Avatar placeholder (replace src with your photo path) -->
+        <div class="hero-avatar">
+          <span class="initials">YJ</span>
+        </div>
+
+        <!-- Typewriter line -->
+        <h1 class="hero-tagline">
+          <span id="typewriter"></span><span class="cursor"></span>
+        </h1>
+
+        <!-- Bio -->
+        <div class="hero-bio fade-in" style="animation-delay: 0.2s">
+          <p>My name is Yash Jain. Professionally, I work as a consultant, and
+            my hobbies include writing, watching films, running, and
+            travelling.</p>
+          <p>I was born and brought up in Delhi. I pursued my bachelor's from
+            SSCBS (DU) and did my MBA from IIM Ahmedabad. I have
+            worked/interned at firms such as BCG, HealthQuad (VC), General
+            Catalyst, and most recently Roland Berger.</p>
+          <p>I write to make sense of the world and this page reflects my
+            beliefs (ever-changing) about business, world, and life in
+            general.</p>
+        </div>
+
+        <!-- Quote -->
+        <div class="hero-quote fade-in" style="animation-delay: 0.4s">
+          <blockquote>
+            "It ain't about how hard you hit, it's about how hard you can get
+            hit and keep moving forward."
+          </blockquote>
+          <cite>— Rocky Balboa</cite>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="footer-name">Yash Jain</span>
+    <div class="footer-links">
+      <a href="work.html">Work</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <span class="footer-copy">
+      © <span id="footerYear"></span> Yash Jain. All rights reserved.
+    </span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
