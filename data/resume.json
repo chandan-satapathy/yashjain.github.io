@@ -1,0 +1,117 @@
+{
+  "experience": [
+    {
+      "company": "Roland Berger",
+      "url": "https://www.rolandberger.com/",
+      "period": "Oct 2025 – Present",
+      "role": "Consultant (Client Facing)",
+      "location": "Gurgaon",
+      "description": "Engagements across Insurance, Automotive, Airports, FMCG",
+      "sections": [
+        {
+          "label": "Key Engagements",
+          "bullets": [
+            "P&L Improvement: Conceptualized, strategized, and implemented growth levers to scale vehicle business by INR 200 Cr",
+            "Strategized 40+ growth initiatives with senior clients from 6+ teams across sourcing, valuation and budgeting",
+            "Spearheaded approval of 10+ products and policy changes from the Board for the first time in the latest 5 years",
+            "Organisational Structure: Spearheaded workforce augmentation for a large scale FMCG manufacturer",
+            "Due Diligence: Evaluated and advised on the acquisition of a TPA by a large insurer in the Middle East",
+            "B-plan build up, assessment of verticals such as auctions, road side assistance, spare parts and repair"
+          ]
+        },
+        {
+          "label": "Stakeholder Management",
+          "bullets": [
+            "Engaged with 5 CXOs & 10+ CXO-1 & 2s on a weekly basis for alignment, strategy and implementation of initiatives",
+            "Trained 5+ clients to operate automated models & reporting dashboards (our IP) to sustainably continue initiatives"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "General Catalyst",
+      "url": "https://www.generalcatalyst.com/",
+      "period": "Jun 2025 – Sep 2025",
+      "role": "Intern (SVP)",
+      "location": "Bangalore",
+      "description": "Investment Team · 3 months",
+      "sections": [
+        {
+          "label": "",
+          "bullets": [
+            "Evaluated multiple start-ups across Fin-Tech, Health Tech, Manufacturing and Fashion for early stage deals worth $5M",
+            "Sourced 100+ start-ups for evaluation; built a thesis on single specialty hospitals for early stage investing"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "HealthQuad VC",
+      "url": "https://www.healthquad.in/",
+      "period": "2023",
+      "role": "Management Trainee",
+      "location": "Delhi",
+      "description": "Investment Team · 6 months",
+      "sections": [
+        {
+          "label": "Deal Evaluation",
+          "bullets": [
+            "Part of $10M investment in a chronic disease management company; deal evaluation, due diligence, business plan",
+            "Evaluated a deal worth $8M in the eyewear space; conducted due diligence, customer review, sentiment analysis"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Boston Consulting Group (BCG)",
+      "url": "https://www.bcg.com/",
+      "period": "2021 – 2023",
+      "role": "Analyst (Client Facing)",
+      "location": "Gurgaon",
+      "description": "Private Equity & Principal Investors · 18 months",
+      "sections": [
+        {
+          "label": "Key Achievements",
+          "bullets": [
+            "Among top 5% analysts to get an outstanding 5/5 rating in 3 cases; Youngest (out of 40) analysts across Asia region",
+            "Fastest promotion across teams from Junior Specialist to Analyst (12 months vs 36 months) in the PE practice"
+          ]
+        },
+        {
+          "label": "Key Engagements",
+          "bullets": [
+            "CDD: Assisted $5Bn PE fund investing in retail payments (USA), spearheaded voice of customers analysis",
+            "CDD: Assessed workforce for a $3Bn PE fund investing in an IT services provider, projected a 10% reduction in attrition",
+            "Led the creation of a GitHub loop focused on use cases in technology DDs; adopted widely in global cases across BCG"
+          ]
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "IIM Ahmedabad",
+      "url": "https://www.iima.ac.in/",
+      "period": "Jun 2023 – Apr 2025",
+      "degree": "PGP (MBA)",
+      "details": "GPA: 3.636 · Top 5% of the batch (I-Schol) · CAT: 99.95%ile",
+      "bullets": [
+        "Awarded the Dun & Bradstreet Merit Industry Scholarship for Rank 11 in Second Year",
+        "Awarded the PGP 2001 Merit Scholarship for Rank 29 in First Year; Overall Rank 18/402 (Top 5%)",
+        "Part of Venture Capital Club, Theatre Society, Writing and Debating Cell; Exchange program: IESEG, France",
+        "Intern: TransformationX Consulting (Dubai, UAE) — Among 2% of 400+ to receive a foreign internship offer"
+      ]
+    },
+    {
+      "institution": "Shaheed Sukhdev College of Business Studies, University of Delhi",
+      "url": "https://sscbs.du.ac.in/",
+      "period": "Jul 2018 – Jun 2021",
+      "degree": "BMS (Bachelors of Management Studies)",
+      "details": "CGPA: 9.041 · Top 5% across DU",
+      "bullets": [
+        "Cleared CFA L1; 99%ile in DU's Joint Admission Test; Top 1% in JEE Mains 2018",
+        "Vice President, CBS Debating Society; Led the society to the title of 'Best DebSoc' by DU Beat for 2 years"
+      ]
+    }
+  ]
+}
