@@ -14,6 +14,7 @@
   <title>Yash Jain</title>
   <meta name="description"
     content="Yash Jain — Management Consultant, Writer, and Explorer." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
@@ -78,21 +79,6 @@
           <span class="initials">YJ</span>
         </div>
 
-        <!-- LinkedIn icon below avatar -->
-        <div class="hero-social">
-          <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
-            target="_blank" rel="noopener noreferrer"
-            class="social-link" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-              <rect x="2" y="9" width="4" height="12"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-          </a>
-        </div>
-
         <!-- Typewriter line — text loaded from data/home.md frontmatter -->
         <h1 class="hero-tagline">
           <span id="typewriter"></span><span class="cursor"></span>
@@ -105,6 +91,34 @@
         <div class="hero-quote fade-in" style="animation-delay: 0.4s">
           <blockquote id="heroQuote"></blockquote>
           <cite id="heroQuoteAuthor"></cite>
+        </div>
+
+        <!-- Section navigation cards -->
+        <div class="home-sections fade-in" style="animation-delay: 0.6s">
+          <a href="work.html" class="home-section-card">
+            <div class="home-section-card-title">Work &rarr;</div>
+            <div class="home-section-card-desc">Consulting, VC &amp; strategy</div>
+          </a>
+          <a href="blog/index.html" class="home-section-card">
+            <div class="home-section-card-title">Blog &rarr;</div>
+            <div class="home-section-card-desc">Essays &amp; life stories</div>
+          </a>
+        </div>
+
+        <!-- LinkedIn contact row (in place of a separate contact section) -->
+        <div class="home-contact fade-in" style="animation-delay: 0.75s">
+          <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
+            target="_blank" rel="noopener noreferrer"
+            class="home-contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            Connect on LinkedIn
+          </a>
         </div>
 
       </section>
