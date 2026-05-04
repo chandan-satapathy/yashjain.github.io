@@ -26,6 +26,7 @@
 
     <div class="nav-right">
       <div class="nav-links">
+        <a href="index.html"      data-nav="home">Home</a>
         <a href="work.html"       data-nav="work">Work</a>
         <a href="blog/index.html" data-nav="blog-index">Blog</a>
         <a href="contact.html"    data-nav="contact">Contact</a>
@@ -61,6 +62,7 @@
 
   <!-- Mobile nav drawer -->
   <div class="nav-mobile" id="navMobile">
+    <a href="index.html"      data-nav="home">Home</a>
     <a href="work.html"       data-nav="work">Work</a>
     <a href="blog/index.html" data-nav="blog-index">Blog</a>
     <a href="contact.html"    data-nav="contact">Contact</a>
@@ -71,37 +73,38 @@
     <div class="container">
       <section class="hero">
 
-        <!-- Avatar placeholder (replace src with your photo path) -->
+        <!-- Avatar placeholder — replace initials with <img> once photo is ready -->
         <div class="hero-avatar">
           <span class="initials">YJ</span>
         </div>
 
-        <!-- Typewriter line -->
+        <!-- LinkedIn icon below avatar -->
+        <div class="hero-social">
+          <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
+            target="_blank" rel="noopener noreferrer"
+            class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Typewriter line — text loaded from data/home.md frontmatter -->
         <h1 class="hero-tagline">
           <span id="typewriter"></span><span class="cursor"></span>
         </h1>
 
-        <!-- Bio -->
-        <div class="hero-bio fade-in" style="animation-delay: 0.2s">
-          <p>My name is Yash Jain. Professionally, I work as a consultant, and
-            my hobbies include writing, watching films, running, and
-            travelling.</p>
-          <p>I was born and brought up in Delhi. I pursued my bachelor's from
-            SSCBS (DU) and did my MBA from IIM Ahmedabad. I have
-            worked/interned at firms such as BCG, HealthQuad (VC), General
-            Catalyst, and most recently Roland Berger.</p>
-          <p>I write to make sense of the world and this page reflects my
-            beliefs (ever-changing) about business, world, and life in
-            general.</p>
-        </div>
+        <!-- Bio — rendered from data/home.md body (markdown with links) -->
+        <div class="hero-bio fade-in" id="heroBio" style="animation-delay: 0.2s"></div>
 
-        <!-- Quote -->
+        <!-- Quote — rendered from data/home.md frontmatter -->
         <div class="hero-quote fade-in" style="animation-delay: 0.4s">
-          <blockquote>
-            "It ain't about how hard you hit, it's about how hard you can get
-            hit and keep moving forward."
-          </blockquote>
-          <cite>— Rocky Balboa</cite>
+          <blockquote id="heroQuote"></blockquote>
+          <cite id="heroQuoteAuthor"></cite>
         </div>
 
       </section>
@@ -112,15 +115,20 @@
   <footer>
     <span class="footer-name">Yash Jain</span>
     <div class="footer-links">
+      <a href="index.html">Home</a>
       <a href="work.html">Work</a>
       <a href="blog/index.html">Blog</a>
       <a href="contact.html">Contact</a>
+      <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
+        target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
     <span class="footer-copy">
       © <span id="footerYear"></span> Yash Jain. All rights reserved.
     </span>
   </footer>
 
+  <!-- marked.js needed to render markdown links in the bio -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

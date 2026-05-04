@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 /* ═══════════════════════════════════════════
    DESIGN TOKENS — change everything from here
@@ -14,7 +14,7 @@
   --color-nav-bg:    rgba(249, 247, 244, 0.88);
 
   /* Typography */
-  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans:  'Courier Prime', 'Courier New', Courier, monospace;
   --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Layout */
@@ -304,11 +304,55 @@ main {
   color: var(--color-text-2);
   font-size: 0.975rem;
   line-height: 1.9;
-  text-align: left;
+  text-align: center;
 }
 
 .hero-bio p + p {
   margin-top: 1rem;
+}
+
+/* Inline links inside bio */
+.hero-bio a {
+  color: var(--color-text-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border);
+  transition: color var(--ease), text-decoration-color var(--ease);
+}
+
+.hero-bio a:hover {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+}
+
+/* LinkedIn / social icon below avatar */
+.hero-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: -0.5rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-2);
+  transition: border-color var(--ease), color var(--ease), transform var(--ease);
+}
+
+.social-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  width: 15px;
+  height: 15px;
 }
 
 .hero-quote {
@@ -343,10 +387,11 @@ main {
 .page-header {
   padding: clamp(3rem, 7vw, 5rem) 0 2.5rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  text-align: center;
 }
 
 .section-title {
@@ -355,12 +400,14 @@ main {
   font-weight: 600;
   color: var(--color-text-1);
   line-height: 1.2;
+  text-align: center;
 }
 
 .section-subtitle {
   margin-top: 0.35rem;
   font-size: 0.875rem;
   color: var(--color-text-2);
+  text-align: center;
 }
 
 .divider {
@@ -432,12 +479,38 @@ main {
 .timeline-entry {
   position: relative;
   margin-bottom: 3rem;
+  border-radius: var(--radius);
+  transition: transform var(--ease);
+  cursor: default;
 }
 
 .timeline-entry:last-child {
   margin-bottom: 0;
 }
 
+/* Invisible card background that fades in on hover */
+.timeline-entry::after {
+  content: '';
+  position: absolute;
+  inset: -0.6rem -0.75rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity var(--ease), box-shadow var(--ease);
+}
+
+.timeline-entry:hover::after {
+  opacity: 1;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.timeline-entry:hover .entry-company {
+  color: var(--color-accent);
+}
+
+/* Accent dot */
 .timeline-entry::before {
   content: '';
   position: absolute;
@@ -449,6 +522,12 @@ main {
   background: var(--color-accent);
   transform: translateX(-3px);
   box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-accent);
+  z-index: 1;
+  transition: box-shadow var(--ease);
+}
+
+.timeline-entry:hover::before {
+  box-shadow: 0 0 0 2px var(--color-surface), 0 0 0 3px var(--color-accent);
 }
 
 .entry-header {
