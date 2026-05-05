@@ -461,15 +461,29 @@ function initWorld() {
           var recs = (p.recommendations || []).map(function (r) {
             return '<li>' + escHtml(r) + '</li>';
           }).join('');
-          html +=
-            '<div class="world-list-entry">' +
-              '<div class="world-list-header">' +
-                '<span class="world-list-country">' + escHtml(p.country) + '</span>' +
-                '<span class="world-list-year">' + escHtml(String(p.year || '')) + postLink + '</span>' +
-              '</div>' +
-              (highlights ? '<div class="world-list-section-label">Highlights</div><ul class="world-list-bullets">' + highlights + '</ul>' : '') +
-              (recs ? '<div class="world-list-section-label">Recommendations</div><ul class="world-list-bullets">' + recs + '</ul>' : '') +
-            '</div>';
+          var hasBody = highlights || recs;
+          if (hasBody) {
+            html +=
+              '<details class="world-list-entry">' +
+                '<summary class="world-list-header">' +
+                  '<span class="world-list-country">' + escHtml(p.country) + '</span>' +
+                  '<span class="world-list-year">' + escHtml(String(p.year || '')) + postLink + '</span>' +
+                  '<span class="world-list-chevron" aria-hidden="true"></span>' +
+                '</summary>' +
+                '<div class="world-list-body">' +
+                  (highlights ? '<div class="world-list-section-label">Highlights</div><ul class="world-list-bullets">' + highlights + '</ul>' : '') +
+                  (recs ? '<div class="world-list-section-label">Recommendations</div><ul class="world-list-bullets">' + recs + '</ul>' : '') +
+                '</div>' +
+              '</details>';
+          } else {
+            html +=
+              '<div class="world-list-entry world-list-entry--simple">' +
+                '<div class="world-list-header">' +
+                  '<span class="world-list-country">' + escHtml(p.country) + '</span>' +
+                  '<span class="world-list-year">' + escHtml(String(p.year || '')) + postLink + '</span>' +
+                '</div>' +
+              '</div>';
+          }
         });
         html += '</div>';
       });
@@ -478,9 +492,9 @@ function initWorld() {
 
     /* ── SVG pan & zoom ── */
     (function () {
-      var vb = { x: 0, y: 30, w: 960, h: 420 };
+      var vb = { x: 0, y: 10, w: 960, h: 470 };
       var MIN_W = 120, MAX_W = 960;
-      var aspect = 420 / 960;
+      var aspect = 470 / 960;
 
       function applyVb() {
         mapEl.setAttribute('viewBox', [
@@ -505,7 +519,7 @@ function initWorld() {
         applyVb();
       }, { passive: false });
 
-      /* Drag → pan */
+      /* Mouse drag → pan */
       var drag = null;
       mapEl.addEventListener('mousedown', function (e) {
         drag = { x: e.clientX, y: e.clientY, vbx: vb.x, vby: vb.y };
@@ -514,14 +528,63 @@ function initWorld() {
       document.addEventListener('mousemove', function (e) {
         if (!drag) return;
         var rect = mapEl.getBoundingClientRect();
-        var scaleX = vb.w / rect.width;
-        var scaleY = vb.h / rect.height;
-        vb.x = drag.vbx - (e.clientX - drag.x) * scaleX;
-        vb.y = drag.vby - (e.clientY - drag.y) * scaleY;
+        vb.x = drag.vbx - (e.clientX - drag.x) * (vb.w / rect.width);
+        vb.y = drag.vby - (e.clientY - drag.y) * (vb.h / rect.height);
         applyVb();
       });
       document.addEventListener('mouseup', function () {
         drag = null;
+        mapEl.classList.remove('dragging');
+      });
+
+      /* Touch: single-finger pan, two-finger pinch-zoom */
+      var pinchStart = null;
+      mapEl.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 1) {
+          drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, vbx: vb.x, vby: vb.y };
+          pinchStart = null;
+          mapEl.classList.add('dragging');
+        } else if (e.touches.length === 2) {
+          drag = null;
+          var dx = e.touches[0].clientX - e.touches[1].clientX;
+          var dy = e.touches[0].clientY - e.touches[1].clientY;
+          pinchStart = {
+            dist: Math.sqrt(dx * dx + dy * dy),
+            vbx: vb.x, vby: vb.y, vbw: vb.w, vbh: vb.h,
+            cx: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+            cy: (e.touches[0].clientY + e.touches[1].clientY) / 2
+          };
+        }
+      }, { passive: true });
+
+      mapEl.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+        if (e.touches.length === 1 && drag) {
+          var rect = mapEl.getBoundingClientRect();
+          vb.x = drag.vbx - (e.touches[0].clientX - drag.x) * (vb.w / rect.width);
+          vb.y = drag.vby - (e.touches[0].clientY - drag.y) * (vb.h / rect.height);
+          applyVb();
+        } else if (e.touches.length === 2 && pinchStart) {
+          var dx = e.touches[0].clientX - e.touches[1].clientX;
+          var dy = e.touches[0].clientY - e.touches[1].clientY;
+          var newDist = Math.sqrt(dx * dx + dy * dy);
+          var factor = pinchStart.dist / newDist;
+          var newW = Math.max(MIN_W, Math.min(MAX_W, pinchStart.vbw * factor));
+          var newH = newW * aspect;
+          var rect = mapEl.getBoundingClientRect();
+          var mx = (pinchStart.cx - rect.left) / rect.width;
+          var my = (pinchStart.cy - rect.top) / rect.height;
+          vb.x = pinchStart.vbx + (pinchStart.vbw - newW) * mx;
+          vb.y = pinchStart.vby + (pinchStart.vbh - newH) * my;
+          vb.w = newW;
+          vb.h = newH;
+          applyVb();
+        }
+      }, { passive: false });
+
+      mapEl.addEventListener('touchend', function () {
+        drag = null;
+        pinchStart = null;
         mapEl.classList.remove('dragging');
       });
     })();
