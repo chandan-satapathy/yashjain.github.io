@@ -246,8 +246,8 @@ main {
 }
 
 .hero-avatar {
-  width: 112px;
-  height: 112px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background: var(--color-border);
   display: flex;
@@ -258,6 +258,8 @@ main {
   border: 3px solid var(--color-surface);
   box-shadow: 0 0 0 1px var(--color-border);
 }
+
+.hero-avatar-hover:hover img { transform: scale(1.04); transition: 0.4s ease;}
 
 .hero-avatar img {
   width: 100%;
