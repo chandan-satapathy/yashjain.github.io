@@ -2,51 +2,9 @@
 
 Personal portfolio site for Yash Jain, hosted on GitHub Pages. Plain HTML/CSS/JS — no build step, no framework, no dependencies beyond a Google Fonts import.
 
----
-
-## Running locally
-
-The site uses `fetch()` to load data files, so you must serve it over HTTP (not open `index.html` directly as a `file://` URL — fetches will fail silently).
-
-```bash
-# Python (built-in, no install)
-python3 -m http.server 8080
-# then open http://localhost:8080
-```
-
-Any static file server works (VS Code Live Server, `npx serve .`, etc.).
-
----
-
-## File structure
-
-```
-yashjain.github.io/
-├── index.html          # Home page
-├── work.html           # Work / resume page
-├── contact.html        # Contact page
-├── blog/
-│   ├── index.html      # Blog listing
-│   └── post.html       # Individual post reader
-├── css/
-│   └── style.css       # All styles — design tokens at the top
-├── js/
-│   └── main.js         # All JS — page-specific init functions
-├── data/
-│   ├── home.json       # Home page content (tagline, bio, quote)
-│   └── resume.json     # Work + education timeline entries
-├── posts/
-│   ├── manifest.json   # Blog index (slug, title, date, excerpt)
-│   └── *.md            # Blog post content (one file per post)
-└── assets/
-    └── favicon.svg     # YJ monogram favicon
-```
-
----
-
 ## How to edit each section
 
-### Home page — `data/home.json`
+### 1. Home page — `data/home.json`
 
 All home page text lives here. Edit this file; the page fetches and renders it on load.
 
@@ -69,7 +27,7 @@ All home page text lives here. Edit this file; the page fetches and renders it o
 
 ---
 
-### Work / Resume — `data/resume.json`
+### 2. Work / Resume — `data/resume.json`
 
 The Work page timeline is driven entirely by this file. It has two top-level arrays: `experience` and `education`.
 
@@ -115,7 +73,7 @@ The Work page timeline is driven entirely by this file. It has two top-level arr
 
 ---
 
-### Blog — `posts/`
+### 3. Blog — `posts/`
 
 The blog has two parts: the manifest index and the post content files.
 
@@ -158,7 +116,7 @@ To remove a post, delete its `.md` file and remove its entry from `manifest.json
 
 ---
 
-### Styling — `css/style.css`
+### 4. Styling — `css/style.css`
 
 All design tokens are at the top of `style.css` in the `:root` block. Change a token once and it updates everywhere.
 
@@ -183,37 +141,19 @@ Dark mode overrides are in the `[data-theme="dark"]` block immediately below. Th
 
 ---
 
-### Adding a profile photo
+### 5. Adding a profile photo
 
-The avatar currently shows "YJ" initials. To swap in a photo:
-
-1. Add your image to `assets/` (e.g. `assets/photo.jpg`).
-2. In `index.html`, find the `hero-avatar` div and replace the `<span>` with an `<img>`:
-
-```html
-<div class="hero-avatar">
-  <img src="assets/photo.jpg" alt="Yash Jain" />
-</div>
-```
-
-The avatar is a `112px` circle with `object-fit: cover` — a square or portrait crop works best.
+Add your image to `assets/` (e.g. `assets/photo.jpg`).
 
 ---
 
-### Navigation and pages
 
-Nav and footer links are hardcoded in each HTML file. If you add a new top-level page, update the `<nav>` and `<footer>` blocks in all five files: `index.html`, `work.html`, `contact.html`, `blog/index.html`, `blog/post.html`.
 
-The active nav link is highlighted by matching `data-nav="..."` on the `<a>` tags against `document.body.dataset.page`. Each page sets its own `data-page="..."` on `<body>`.
 
----
 
-## Deploying
 
-The site is hosted on GitHub Pages from the `main` branch. Merging a PR into `main` deploys automatically within ~60 seconds — no CI or build step.
 
-**Standard workflow:**
-1. Create a branch off `main`.
-2. Make changes, test locally with `python3 -m http.server 8080`.
-3. Push the branch and open a PR against `main`.
-4. Merge — done.
+
+
+
+
