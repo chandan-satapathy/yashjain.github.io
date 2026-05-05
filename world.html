@@ -11,26 +11,25 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog — Yash Jain</title>
-  <meta name="description"
-    content="Writing by Yash Jain on business, the world, and life." />
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <title>World — Yash Jain</title>
+  <meta name="description" content="Countries Yash Jain has visited, with highlights and recommendations." />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-<body data-page="blog-index">
+<body data-page="world">
 
   <!-- ═══ NAV ═══ -->
   <nav class="nav">
-    <a href="../index.html" class="nav-logo">Yash Jain</a>
+    <a href="index.html" class="nav-logo">Yash Jain</a>
 
     <div class="nav-right">
       <div class="nav-links">
-        <a href="../index.html"   data-nav="home">Home</a>
-        <a href="../work.html"    data-nav="work">Work</a>
-        <a href="index.html"      data-nav="blog-index">Blog</a>
-        <a href="../world.html" data-nav="world" class="nav-icon-link" aria-label="World">
+        <a href="index.html"      data-nav="home">Home</a>
+        <a href="work.html"       data-nav="work">Work</a>
+        <a href="blog/index.html" data-nav="blog-index">Blog</a>
+        <a href="world.html"      data-nav="world" class="nav-icon-link" aria-label="World">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -79,29 +78,47 @@
   </nav>
 
   <div class="nav-mobile" id="navMobile">
-    <a href="../index.html"   data-nav="home">Home</a>
-    <a href="../work.html"    data-nav="work">Work</a>
-    <a href="index.html"      data-nav="blog-index">Blog</a>
-    <a href="../world.html"   data-nav="world">World</a>
-    <a href="../contact.html" data-nav="contact">Contact</a>
+    <a href="index.html"      data-nav="home">Home</a>
+    <a href="work.html"       data-nav="work">Work</a>
+    <a href="blog/index.html" data-nav="blog-index">Blog</a>
+    <a href="world.html"      data-nav="world">World</a>
+    <a href="contact.html"    data-nav="contact">Contact</a>
   </div>
 
   <!-- ═══ MAIN ═══ -->
   <main>
     <div class="container">
 
-      <div class="page-header" style="display: block; padding-bottom: 2rem;">
-        <h1 class="section-title">Blog</h1>
-        <p class="section-subtitle">
-          Writing to make sense of the world — business, life, and everything
-          in between.
-        </p>
+      <div class="page-header">
+        <h1 class="section-title">World</h1>
+        <p class="section-subtitle">Places I've been and what I'd tell you about them.</p>
       </div>
 
-      <!-- Cards are injected here by main.js -->
-      <div class="blog-grid" id="blogGrid">
-        <p class="loading">Loading posts…</p>
+      <!-- Country counter -->
+      <div class="world-stats">
+        <div class="world-counter">
+          <span class="world-counter-number" id="counterNumber">0</span>
+          <span class="world-counter-label">countries visited</span>
+        </div>
+        <div class="world-continents" id="continentBreakdown"></div>
       </div>
+
+      <!-- Map -->
+      <div class="world-map-wrap">
+        <svg class="world-map-svg" id="worldMap" viewBox="0 0 960 500"
+          xmlns="http://www.w3.org/2000/svg" aria-label="World map">
+          <g id="mapCountries"></g>
+        </svg>
+        <!-- Hover card -->
+        <div class="map-card" id="mapCard" aria-live="polite"></div>
+      </div>
+
+      <!-- Country list (mobile fallback / supplementary) -->
+      <div class="divider"></div>
+      <div class="world-list-label">All visits</div>
+      <div class="world-list" id="worldList"></div>
+
+      <div style="height: clamp(3rem, 6vw, 5rem)"></div>
 
     </div>
   </main>
@@ -110,11 +127,11 @@
   <footer>
     <span class="footer-name">Yash Jain</span>
     <div class="footer-links">
-      <a href="../index.html">Home</a>
-      <a href="../work.html">Work</a>
-      <a href="index.html">Blog</a>
-      <a href="../world.html">World</a>
-      <a href="../contact.html">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="world.html">World</a>
+      <a href="contact.html">Contact</a>
       <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
         target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
@@ -123,6 +140,6 @@
     </span>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
