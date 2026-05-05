@@ -69,7 +69,7 @@ The Work page timeline is driven entirely by this file. It has two top-level arr
 - Add new entries to the top of the `experience` array to keep newest-first order.
 - All fields are plain text — no markdown is processed.
 
-**Adding a downloadable CV:** drop a file named `resume.pdf` into the repo root. The "Download CV" link on the Work page already points to it.
+**Adding a downloadable CV:** drop/replace a file named `resume.pdf` into the repo root. The "Download CV" link on the Work page already points to it.
 
 ---
 
@@ -143,7 +143,7 @@ Dark mode overrides are in the `[data-theme="dark"]` block immediately below. Th
 
 ### 5. Adding a profile photo
 
-Add your image to `assets/` (e.g. `assets/photo.jpg`).
+Add/replace your image to `assets/` in `assets/photo.jpg`.
 
 ---
 
