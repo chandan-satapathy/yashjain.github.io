@@ -1000,9 +1000,10 @@ footer {
    ═══════════════════════════════════════════════════════════════════════ */
 .world-stats {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
+  text-align: center;
+  gap: 0.75rem;
   margin-bottom: 2rem;
 }
 
@@ -1032,6 +1033,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 .continent-pill {
@@ -1050,23 +1052,38 @@ footer {
 /* ═══════════════════════════════════════════════════════════════════════
    WORLD — map
    ═══════════════════════════════════════════════════════════════════════ */
-.world-map-wrap {
+.world-map-outer {
   position: relative;
   width: 100%;
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   overflow: hidden;
-  margin-bottom: 0.5rem;
-  /* Extend past container on wide screens for full-width feel */
-  margin-left: calc(-1 * clamp(1.5rem, 5vw, 2.5rem));
-  width: calc(100% + 2 * clamp(1.5rem, 5vw, 2.5rem));
+  margin-bottom: 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .world-map-svg {
   display: block;
   width: 100%;
   height: auto;
+  cursor: grab;
+}
+
+.world-map-svg.dragging {
+  cursor: grabbing;
+}
+
+.map-zoom-hint {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-2);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 /* Country path colours */
@@ -1107,7 +1124,7 @@ footer {
 
 /* ─── Hover card ─── */
 .map-card {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
@@ -1119,7 +1136,7 @@ footer {
   padding: 0.85rem 1rem;
   width: 250px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  z-index: 10;
+  z-index: 200;
   transition: opacity 0.15s ease;
 }
 
@@ -1215,6 +1232,22 @@ footer {
   margin-bottom: 1.5rem;
 }
 
+.world-list-continent-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.world-list-continent-group:first-child .world-list-continent-header {
+  margin-top: 0;
+}
+
 .world-list {
   display: flex;
   flex-direction: column;
@@ -1292,14 +1325,6 @@ footer {
 
 /* Responsive tweaks */
 @media (max-width: 480px) {
-  .world-map-wrap {
-    margin-left: calc(-1 * clamp(1.5rem, 5vw, 2.5rem));
-    width: calc(100% + 2 * clamp(1.5rem, 5vw, 2.5rem));
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-
   footer {
     flex-direction: column;
     align-items: flex-start;

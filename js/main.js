@@ -431,34 +431,100 @@ function initWorld() {
       continentEl.innerHTML = parts.join('');
     }
 
-    /* ── Country list (below map) ── */
+    /* ── Country list grouped by continent ── */
     if (listEl) {
-      var sorted = places
-        .filter(function (p) { return !p.wishlist; })
-        .slice()
-        .sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
-      listEl.innerHTML = sorted.map(function (p) {
-        var postLink = p.post
-          ? ' <a class="world-list-post" href="blog/post.html?slug=' + encodeURIComponent(p.post) + '">Read &rarr;</a>'
-          : '';
-        var highlights = (p.highlights || []).map(function (h) {
-          return '<li>' + escHtml(h) + '</li>';
-        }).join('');
-        var recs = (p.recommendations || []).map(function (r) {
-          return '<li>' + escHtml(r) + '</li>';
-        }).join('');
-        return (
-          '<div class="world-list-entry">' +
-            '<div class="world-list-header">' +
-              '<span class="world-list-country">' + escHtml(p.country) + '</span>' +
-              '<span class="world-list-year">' + escHtml(String(p.year || '')) + postLink + '</span>' +
-            '</div>' +
-            (highlights ? '<div class="world-list-section-label">Highlights</div><ul class="world-list-bullets">' + highlights + '</ul>' : '') +
-            (recs ? '<div class="world-list-section-label">Recommendations</div><ul class="world-list-bullets">' + recs + '</ul>' : '') +
-          '</div>'
-        );
-      }).join('');
+      var visited_places = places.filter(function (p) { return !p.wishlist; });
+      /* Build continent → sorted entries map */
+      var groups = {};
+      var groupOrder = [];
+      visited_places.forEach(function (p) {
+        var c = ISO_CONTINENT[p.code] || 'Other';
+        if (!groups[c]) { groups[c] = []; groupOrder.push(c); }
+        groups[c].push(p);
+      });
+      /* Sort entries within each group newest-first */
+      groupOrder.forEach(function (c) {
+        groups[c].sort(function (a, b) { return (b.year || 0) - (a.year || 0); });
+      });
+      /* Render */
+      var html = '';
+      groupOrder.sort().forEach(function (c) {
+        html += '<div class="world-list-continent-group">';
+        html += '<div class="world-list-continent-header">' + escHtml(c) + '</div>';
+        groups[c].forEach(function (p) {
+          var postLink = p.post
+            ? ' <a class="world-list-post" href="blog/post.html?slug=' + encodeURIComponent(p.post) + '">Read &rarr;</a>'
+            : '';
+          var highlights = (p.highlights || []).map(function (h) {
+            return '<li>' + escHtml(h) + '</li>';
+          }).join('');
+          var recs = (p.recommendations || []).map(function (r) {
+            return '<li>' + escHtml(r) + '</li>';
+          }).join('');
+          html +=
+            '<div class="world-list-entry">' +
+              '<div class="world-list-header">' +
+                '<span class="world-list-country">' + escHtml(p.country) + '</span>' +
+                '<span class="world-list-year">' + escHtml(String(p.year || '')) + postLink + '</span>' +
+              '</div>' +
+              (highlights ? '<div class="world-list-section-label">Highlights</div><ul class="world-list-bullets">' + highlights + '</ul>' : '') +
+              (recs ? '<div class="world-list-section-label">Recommendations</div><ul class="world-list-bullets">' + recs + '</ul>' : '') +
+            '</div>';
+        });
+        html += '</div>';
+      });
+      listEl.innerHTML = html;
     }
+
+    /* ── SVG pan & zoom ── */
+    (function () {
+      var vb = { x: 0, y: 30, w: 960, h: 420 };
+      var MIN_W = 120, MAX_W = 960;
+      var aspect = 420 / 960;
+
+      function applyVb() {
+        mapEl.setAttribute('viewBox', [
+          vb.x.toFixed(2), vb.y.toFixed(2),
+          vb.w.toFixed(2), vb.h.toFixed(2)
+        ].join(' '));
+      }
+
+      /* Wheel → zoom toward cursor */
+      mapEl.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        var factor = e.deltaY > 0 ? 1.15 : 0.87;
+        var rect = mapEl.getBoundingClientRect();
+        var mx = (e.clientX - rect.left) / rect.width;
+        var my = (e.clientY - rect.top)  / rect.height;
+        var newW = Math.max(MIN_W, Math.min(MAX_W, vb.w * factor));
+        var newH = newW * aspect;
+        vb.x += (vb.w - newW) * mx;
+        vb.y += (vb.h - newH) * my;
+        vb.w = newW;
+        vb.h = newH;
+        applyVb();
+      }, { passive: false });
+
+      /* Drag → pan */
+      var drag = null;
+      mapEl.addEventListener('mousedown', function (e) {
+        drag = { x: e.clientX, y: e.clientY, vbx: vb.x, vby: vb.y };
+        mapEl.classList.add('dragging');
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!drag) return;
+        var rect = mapEl.getBoundingClientRect();
+        var scaleX = vb.w / rect.width;
+        var scaleY = vb.h / rect.height;
+        vb.x = drag.vbx - (e.clientX - drag.x) * scaleX;
+        vb.y = drag.vby - (e.clientY - drag.y) * scaleY;
+        applyVb();
+      });
+      document.addEventListener('mouseup', function () {
+        drag = null;
+        mapEl.classList.remove('dragging');
+      });
+    })();
 
     /* ── Dismiss card on outside click ── */
     document.addEventListener('click', function (e) {
@@ -506,13 +572,12 @@ function showMapCard(e, place, isWish, cardEl) {
 
 function positionCard(e, cardEl) {
   if (cardEl._locked) return;
-  var rect = cardEl.parentElement.getBoundingClientRect();
-  var x = e.clientX - rect.left + 12;
-  var y = e.clientY - rect.top + 12;
-  /* Flip if too close to right edge */
-  if (x + 260 > rect.width) x = e.clientX - rect.left - 270;
-  /* Flip if too close to bottom edge */
-  if (y + cardEl.offsetHeight > rect.height) y = e.clientY - rect.top - cardEl.offsetHeight - 8;
+  var x = e.clientX + 14;
+  var y = e.clientY + 14;
+  /* Flip horizontally if too close to right edge */
+  if (x + 260 > window.innerWidth)  x = e.clientX - 270;
+  /* Flip vertically if too close to bottom edge */
+  if (y + (cardEl.offsetHeight || 200) > window.innerHeight) y = e.clientY - (cardEl.offsetHeight || 200) - 8;
   cardEl.style.left = x + 'px';
   cardEl.style.top  = y + 'px';
 }
