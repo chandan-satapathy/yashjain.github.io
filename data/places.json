@@ -2,65 +2,135 @@
   {
     "country": "India",
     "code": "IN",
+    "year": "2000–present",
+    "highlights": [
+      "The historic site of multiple 'please take me back' phone calls, all lovingly unanswered",
+    ],
+    "recommendations": [
+      "Begging works about 0% of the time, but do try it several times to be thorough",
+    ],
+    "post": ""
+  },
+  {
+    "country": "France",
+    "code": "FR",
     "year": 2024,
-    "highlights": ["The ghats at Varanasi", "Old Delhi at dusk", "Hill stations of Himachal"],
-    "recommendations": ["Travel by train — nothing compares", "Visit in October–February", "Try the street food everywhere"],
+    "highlights": [
+      "Parisian cafés: excellent croissants, excellent acoustics for silent treatments",
+      "The Seine at night, which has now witnessed more breakup speeches than a therapy room"
+    ],
+    "recommendations": [
+      "Pack light — the emotional baggage takes up all the overhead bin space"
+    ],
+    "post": ""
+  },
+  {
+    "country": "Italy",
+    "code": "IT",
+    "year": 2024,
+    "highlights": [
+      "Gelato consumed in grief — every flavour hits different when you're quietly spiralling"
+    ],
+    "recommendations": [
+      "Italians invented drama. You fit right in. They are not flattered."
+    ],
+    "post": ""
+  },
+  {
+    "country": "Switzerland",
+    "code": "CH",
+    "year": 2024,
+    "highlights": [
+      "The Alps — majestic, cold, and emotionally unavailable (finally, something familiar)",
+      "Swiss chocolate: the only thing on this trip that didn't disappoint"
+    ],
+    "recommendations": [
+      "Switzerland is famously neutral — unlike, evidently, your girlfriend",
+      "The mountains are an excellent place to contemplate why you are the way you are",
+      "Most expensive country in Europe; most expensive mistakes in the trip — consistent"
+    ],
+    "post": ""
+  },
+  {
+    "country": "Germany",
+    "code": "DE",
+    "year": 2024,
+    "highlights": [
+      "Berlin's rich history of things collapsing and somehow getting rebuilt — relatable",
+      "The autobahn — no speed limits, not unlike how fast this was unravelling"
+    ],
+    "recommendations": [
+      "Germans are efficient, direct, and unbothered. Take notes. Take many notes.",
+    ],
+    "post": ""
+  },
+  {
+    "country": "Hungary",
+    "code": "HU",
+    "year": 2024,
+    "highlights": [
+      "Parliament at night, glowing witness to the patch-up that everyone knew was temporary"
+    ],
+    "recommendations": [
+      "You owe Hungary an apology — it didn't ask to host your reunion scene",
+      "Beautiful country. You were not emotionally ready for Europe. Or relationships."
+    ],
     "post": ""
   },
   {
     "country": "United Arab Emirates",
     "code": "AE",
-    "year": 2023,
-    "highlights": ["Dubai skyline at night", "Desert safari at sunset"],
-    "recommendations": ["Stay in Deira for the real city", "Go in winter — the heat is no joke"],
-    "post": ""
-  },
-  {
-    "country": "Singapore",
-    "code": "SG",
-    "year": 2023,
-    "highlights": ["Gardens by the Bay", "Hawker centres at Maxwell Road"],
-    "recommendations": ["Walk everywhere — the city rewards it", "Don't skip Chinatown and Little India"],
-    "post": ""
-  },
-  {
-    "country": "Thailand",
-    "code": "TH",
-    "year": 2022,
-    "highlights": ["Temples of Chiang Mai", "Koh Lanta at low season"],
-    "recommendations": ["Rent a scooter up north", "Avoid Phuket in peak season"],
-    "post": ""
-  },
-  {
-    "country": "Nepal",
-    "code": "NP",
-    "year": 2022,
-    "highlights": ["Sunrise over the Himalayas from Nagarkot", "Thamel at night"],
-    "recommendations": ["Acclimatise properly before trekking", "October is the best month"],
+    "year": 2024,
+    "highlights": [
+      "The Burj Khalifa: the tallest building in the world, and you, alone beneath it",
+      "Dubai Marina at golden hour — stunning when shared, merely expensive when not",
+    ],
+    "recommendations": [
+      "The city is engineered to make you feel small. For once, it required no extra effort.",
+      "The shawarma was there for you. The shawarma always is."
+    ],
     "post": ""
   },
   {
     "country": "Sri Lanka",
     "code": "LK",
-    "year": 2021,
-    "highlights": ["Sigiriya rock fortress", "Tea estates in Ella"],
-    "recommendations": ["Hire a tuk-tuk driver for a few days", "The south coast is underrated"],
+    "year": 2025,
+    "highlights": [
+      "Colombo: visited repeatedly because love and poor financial planning are indistinguishable",
+      "Pristine beaches where you fought anyway — the commitment to chaos is honestly impressive",
+      "Tea plantations: serene, pastoral, and entirely indifferent to the ongoing situation"
+    ],
+    "recommendations": [
+      "Flying back and forth for someone who also argues with you upon arrival — bold economics",
+      "Sri Lanka is breathtaking; you wouldn't know, you were busy"
+    ],
     "post": ""
   },
   {
-    "country": "Maldives",
-    "code": "MV",
-    "year": 2021,
-    "highlights": ["Bioluminescent beach at night", "Snorkelling the house reef"],
-    "recommendations": ["Local island stays are half the price of resorts", "Sunrise side of the island always"],
+    "country": "Thailand",
+    "code": "TH",
+    "year": 2026,
+    "highlights": [
+      "Thai beaches that were beautiful and entirely incapable of saving anything",
+      "The Land of Smiles — you tested the structural limits of that brand promise"
+    ],
+    "recommendations": [
+      "Pad thai is warm and dependable. Appreciate what is warm and dependable.",
+      "The breakup followed shortly after — Thailand, as always, is not the problem"
+    ],
     "post": ""
   },
   {
-    "country": "Malaysia",
-    "code": "MY",
-    "year": 2023,
-    "highlights": ["Batu Caves at golden hour", "Penang's street art and food"],
-    "recommendations": ["Penang over KL if you can only do one", "Try char kway teow at a proper kopitiam"],
+    "country": "Indonesia",
+    "code": "ID",
+    "year": 2026,
+    "highlights": [
+      "70+ calls, multiple emails, too many drunk nights - all this before we've reached bali"
+    ],
+    "recommendations": [
+      "Returned heartbroken, as predicted by everyone including the universe",
+      "Next time: go alone. Or with a friend. Or with a stranger. Anyone, really."
+    ],
     "post": ""
   }
 ]
