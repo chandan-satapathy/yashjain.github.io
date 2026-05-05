@@ -377,7 +377,6 @@ main {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-text-2);
-  margin-top: -0.75rem;
   transition: color var(--ease);
 }
 
